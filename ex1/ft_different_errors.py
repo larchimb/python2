@@ -11,7 +11,8 @@ def garden_operations() -> None:
               "Caught ZeroDivisionError: division by zero")
     try:
         open("missing.txt")
-    except FileNotFoundError:
+    except FileNotFoundError as e:
+        print(f"\n{e}\n")
         print("\nTesting FileNotFoundError...\n"
               "Caught FileNotFoundError: No such file 'missing.txt'")
     try:
