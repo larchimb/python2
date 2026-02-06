@@ -20,6 +20,7 @@ class PlantError(GardenError):
     def __str__(self) -> str:
         return "No plants in your garden!!"
 
+
 class WaterError(GardenError):
 
     def __str__(self) -> str:
@@ -50,7 +51,8 @@ class GardenManager():
         print(text)
 
     @classmethod
-    def add_plant(cls, name: str | None, water: int | None, sun: int | None) -> str:
+    def add_plant(cls, name: str | None,
+                  water: int | None, sun: int | None) -> str:
         """Add one plant to a specific garden"""
         try:
             if (type(name) is not str or len(name) == 0):
@@ -60,7 +62,7 @@ class GardenManager():
             elif (type(sun) is not int or sun < 0):
                 raise ValueError(f"Error: Sun must be >= 0 for {name}!\n")
         except ValueError as e:
-            return(f"{e}")
+            return (f"{e}")
         cls.plant_list.append(Plant(name, water, sun))
         return (f"Added {name} successfully\n")
 
@@ -78,7 +80,7 @@ class GardenManager():
             if (len(cls.plant_list) == 0):
                 raise PlantError
         except GardenError as e:
-            cls.issues += (f"Caught GardenError in water_plants: {e}\n")
+            cls.issues += (f"Caught GardenError in water_plants: {e}")
         finally:
             print("Closing watering system (cleanup)\n")
 
@@ -88,7 +90,7 @@ class GardenManager():
             if (len(cls.plant_list) == 0):
                 raise PlantError
         except GardenError as e:
-            cls.issues += (f"Caught GardenError in plant_health: {e}\n")
+            cls.issues += (f"Caught GardenError in plant_health: {e}")
         print("Checking plant health...")
         for plant in cls.plant_list:
             cls.check_health(plant)
@@ -114,6 +116,7 @@ class GardenManager():
         except (ValueError) as e:
             print(f"{e}")
 
+
 if (__name__ == "__main__"):
     plant_datas = [
         ("tomato", 4, 8),
@@ -129,3 +132,5 @@ if (__name__ == "__main__"):
     garden.check_plant_health()
     print("Testing error recovery...")
     print(garden.issues)
+    print("System recovered and continuing...\n"
+          "\nGarden management system test complete!")
